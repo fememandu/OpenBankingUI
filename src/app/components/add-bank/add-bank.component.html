@@ -1,0 +1,22 @@
+<div class="container">
+    <h1>Add new bank</h1>
+    <div class="row">
+        <div class="col-6">
+            <form #form="ngForm" (ngSubmit)="addBank()">
+                <div class="mb-3">
+                    <label for="bankName" class="form-label">Bank Name</label>
+                    <input type="text" class="form-control" id="bankName" name="bankName" [(ngModel)]="newBank.bankName">
+                </div>
+                <div class="mb-3"> 
+                    <label for="sortCode" class="form-label">Sort Code</label>
+                    <input type="number" class="form-control" id="sortCode" name="sortCode" [(ngModel)]="newBank.sortCode">
+                </div>
+                <div class="mb-3">
+                    <label for="bankAddress" class="form-label">Bank Address</label>
+                    <input type="text" class="form-control" id="bankAddress" name="bankAddress" [(ngModel)]="newBank.bankAddress">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

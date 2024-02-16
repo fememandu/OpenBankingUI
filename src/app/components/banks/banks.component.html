@@ -1,0 +1,28 @@
+<div class="container">
+    <h1>Banks</h1>
+    <table class="table" *ngIf="banks && banks.length > 0">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Bank Name</th>
+                <th scope="col">Bank Address</th>
+                <th scope="col">Sort Code</th>
+                <th scope="col">Active?</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let bank of banks">
+                <td>{{bank.id}}</td>
+                <td>{{bank.bankName}}</td>
+                <td>{{bank.bankAddress}}</td>
+                <td>{{bank.sortCode}}</td>
+                <td>{{bank.isActive}}</td>
+                <td><a [routerLink]="['/banks','edit',bank.id]">Edit</a></td>
+                <td><a >Delete</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <p *ngIf="!banks || banks.length == 0">No banks found</p>
+</div>
