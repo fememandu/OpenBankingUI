@@ -9,8 +9,11 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './edit-bank.component.css'
 })
 export class EditBankComponent implements OnInit{
+  error: string | null = null;
+  message: string | null = null;
 
-constructor(private route: ActivatedRoute, private bankService: BanksService, private router: Router){}
+  constructor(private route: ActivatedRoute, private bankService: BanksService, private router: Router){}
+  
   ngOnInit(): void {
     this.route.paramMap.subscribe({
       next: (params) =>{
@@ -19,8 +22,11 @@ constructor(private route: ActivatedRoute, private bankService: BanksService, pr
         if(id){
           this.bankService.getBank(parseInt(id))
             .subscribe({
-              next: (response) => {
-                this.updateBankDTO = response;
+              next: (bank) => {
+                this.updateBankDTO = bank;
+              },
+              error: (response) => {
+                this.error = response.error.message;
               }
             })
         }
@@ -40,10 +46,11 @@ constructor(private route: ActivatedRoute, private bankService: BanksService, pr
     this.bankService.updateBank(this.updateBankDTO.id, this.updateBankDTO)
       .subscribe({
         next: (response) => {
-          this.router.navigate(['banks']);
+          this.message = "Bank was updated successfully!";
+          this.router.navigate([this.router.url]);
         },
         error: (err) => {
-          console.log(err);
+          this.error = err.error.message;
         }
       })
   }

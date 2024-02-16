@@ -7,9 +7,9 @@
                 <th scope="col">Bank Name</th>
                 <th scope="col">Bank Address</th>
                 <th scope="col">Sort Code</th>
-                <th scope="col">Active?</th>
-                <th></th>
-                <th></th>
+                <th scope="col">Status</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Change Status</th>
             </tr>
         </thead>
         <tbody>
@@ -18,9 +18,17 @@
                 <td>{{bank.bankName}}</td>
                 <td>{{bank.bankAddress}}</td>
                 <td>{{bank.sortCode}}</td>
-                <td>{{bank.isActive}}</td>
+                <td *ngIf="bank.isActive == true; else InActive" style="color: green; font-weight: bold;">Active</td>
+                <ng-template #InActive>
+                    <td style="color: red; font-weight: bold;">Inactive</td>
+                </ng-template>
                 <td><a [routerLink]="['/banks','edit',bank.id]">Edit</a></td>
-                <td><a >Delete</a></td>
+                <td>
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" id="isActive" name="isActive" [(ngModel)]="bank.isActive">
+                      <label class="form-check-label" for="isActive">Active</label>
+                    </div>
+                </td>                  
             </tr>
         </tbody>
     </table>

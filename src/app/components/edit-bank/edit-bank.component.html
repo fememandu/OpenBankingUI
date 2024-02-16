@@ -2,7 +2,13 @@
     <h1 style="margin: 20px 0;">Update bank</h1>
     <div class="row">
         <div class="col-6">
-            <form #form="ngForm" (ngSubmit)="updateBank()">
+            <div class="alert alert-success" role="alert" *ngIf="message">
+                {{message}}
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="error">
+                {{error}}
+            </div>
+            <form #form="ngForm" (ngSubmit)="updateBank()" *ngIf="!error">
                 <div class="mb-3">
                     <label for="id" class="form-label">ID</label>
                     <input readonly type="text" class="form-control bg-light" id="id" name="id" [(ngModel)]="updateBankDTO.id">
@@ -13,7 +19,7 @@
                 </div>
                 <div class="mb-3"> 
                     <label for="sortCode" class="form-label">Sort Code</label>
-                    <input type="number" class="form-control" id="sortCode" name="sortCode" minlength="6" maxlength="6" required [(ngModel)]="updateBankDTO.sortCode">
+                    <input type="text" class="form-control" id="sortCode" name="sortCode" minlength="6" maxlength="6" required [(ngModel)]="updateBankDTO.sortCode">
                     <div class="alert-feedback" *ngIf="form.controls['sortCode'].invalid && (form.controls['sortCode'].dirty || form.controls['sortCode'].touched)">
                         <div *ngIf="form.controls['sortCode'].errors?.['required']">Sort Code is required.</div>
                         <div *ngIf="form.controls['sortCode'].errors?.['minlength'] || form.controls['sortCode'].errors?.['maxlength']">
@@ -27,6 +33,11 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Update Bank</button>
             </form>
+            <div class="alert alert-danger" role="alert" *ngIf="error">
+                <div>{{error}}</div>
+                <p></p>
+                <a class="btn btn-secondary" role="button" [routerLink]="['/banks']">Go to banks</a>
+            </div>
         </div>
     </div>
     
